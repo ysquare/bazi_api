@@ -15,7 +15,7 @@ XiZ = ['摩羯', '水瓶', '双鱼', '白羊', '金牛', '双子', '巨蟹', '�
 WeekCn = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
 
 import  sxtwl
-from quart import Quart, request, jsonify
+from quart import Quart, request
 import quart, quart_cors
 import json, requests
 
@@ -35,7 +35,7 @@ def getBazi(year, month, day, hour, min=0, sec=0):
     return yPillar + mPillar + dPillar + sPillar
 
 
-app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
+app = quart_cors.cors(Quart(__name__), allow_origin="https://chat.openai.com")
 HOST_URL = "https://oc.ag1.pro"
 
 @app.post('/bazi')
@@ -48,7 +48,9 @@ async def bazi():
     min = data.get('min', 0)
     sec = data.get('sec', 0)
 
-    body = {'result': getBazi(year, month, day, hour, min, sec)}
+    body = {
+        'input': data,
+        'result': getBazi(year, month, day, hour, min, sec)}
 
     return quart.Response(response=json.dumps(body), status=200)
 
