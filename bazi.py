@@ -48,9 +48,11 @@ async def bazi():
     min = data.get('min', 0)
     sec = data.get('sec', 0)
 
+    bazi = getBazi(year, month, day, hour, min, sec)
+    print(bazi)
+
     body = {
         'input': data,
-        'internal': getBazi(year, month, day, hour, min, sec),
         'result': getBazi(year, month, day, hour, min, sec)}
 
     return quart.Response(response=json.dumps(body), status=200)
