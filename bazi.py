@@ -59,4 +59,4 @@ if __name__ == '__main__':
     import ssl
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
     ssl_context.load_cert_chain(certfile='/home/ubuntu/certs/ag1.pro_cert.pem', keyfile='/home/ubuntu/certs/ag1.pro_key.key')
-    app.run(host="0.0.0.0", port=7860)
+    app.run(host="0.0.0.0", port=7860, ssl=ssl_context)
