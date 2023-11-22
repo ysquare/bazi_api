@@ -32,7 +32,14 @@ def getBazi(year, month, day, hour, min=0, sec=0):
     dPillar = Gan[dTG.tg] + Zhi[dTG.dz]
     sTG = date.getHourGZ(hour)
     sPillar = Gan[sTG.tg] + Zhi[sTG.dz]
-    return yPillar + mPillar + dPillar + sPillar
+    result_data = {
+        '年柱' : yPillar,
+        '月柱' : mPillar, 
+        '日柱' : dPillar,
+        '时柱' : sPillar,
+        '八字' : yPillar + mPillar + dPillar + sPillar
+        }
+    return result_data
 
 
 app = quart_cors.cors(Quart(__name__), allow_origin="https://chat.openai.com")
