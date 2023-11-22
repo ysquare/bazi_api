@@ -55,4 +55,4 @@ async def test():
     text = f"Hello from {host}!"
     return quart.Response(text, mimetype="text/plain")
 
-app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=7860)
