@@ -58,9 +58,11 @@ async def bazi():
     hour = data.get('hour')
     min = data.get('min', 0)
     sec = data.get('sec', 0)
+
+    bazi_result = getBazi(year, month, day, hour, min, sec)
     body = {
         'input': data,
-        'result': bazi}
+        'result': bazi_result}
     
     print(body)
 
