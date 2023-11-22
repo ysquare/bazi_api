@@ -48,9 +48,9 @@ async def bazi():
     min = data.get('min', 0)
     sec = data.get('sec', 0)
 
-    body = jsonify({'result': getBazi(year, month, day, hour, min, sec)})
+    body = {'result': getBazi(year, month, day, hour, min, sec)}
 
-    return quart.Response(response=body, status=200)
+    return quart.Response(response=json.dumps(body), status=200)
 
 @app.get("/test")
 async def test():
