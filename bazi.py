@@ -33,11 +33,11 @@ def getBazi(year, month, day, hour, min=0, sec=0):
     sTG = date.getHourGZ(hour)
     sPillar = Gan[sTG.tg] + Zhi[sTG.dz]
     result_data = {
-        '年柱' : yPillar,
-        '月柱' : mPillar, 
-        '日柱' : dPillar,
-        '时柱' : sPillar,
-        '八字' : yPillar + mPillar + dPillar + sPillar
+        'year_pillar' : yPillar,
+        'mon_pillar' : mPillar, 
+        'day_pillar' : dPillar,
+        'hour_pillar' : sPillar,
+        'bazi' : yPillar + mPillar + dPillar + sPillar
         }
     return result_data
 
