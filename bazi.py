@@ -53,7 +53,9 @@ async def bazi():
 
     body = {
         'input': data,
-        'result': getBazi(year, month, day, hour, min, sec)}
+        'result': bazi}
+    
+    print(body)
 
     return quart.Response(response=json.dumps(body), status=200)
 
