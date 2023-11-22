@@ -16,7 +16,9 @@ WeekCn = ["星期日", "星期一", "星期二", "星期三", "星期四", "星�
 
 import  sxtwl
 from quart import Quart, request, jsonify
-import quart
+import quart, quart_cors
+import json, requests
+
 
 
 # 从年月日时获得四柱八字，缺点：还计算经度对真太阳时带来的影响
@@ -33,7 +35,8 @@ def getBazi(year, month, day, hour, min=0, sec=0):
     return yPillar + mPillar + dPillar + sPillar
 
 
-app = Quart(__name__)
+app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
+HOST_URL = "https://oc.ag1.pro"
 
 @app.post('/bazi')
 async def bazi():
@@ -45,9 +48,9 @@ async def bazi():
     min = data.get('min', 0)
     sec = data.get('sec', 0)
 
-    result = getBazi(year, month, day, hour, min, sec)
+    body = jsonify({'result': getBazi(year, month, day, hour, min, sec)})
 
-    return jsonify({'result': result})
+    return quart.Response(response=body, status=200)
 
 @app.get("/test")
 async def test():
@@ -55,10 +58,15 @@ async def test():
     text = f"Hello from {host}!"
     return quart.Response(text, mimetype="text/plain")
 
+@app.get("/players")
+async def get_players():
+    query = request.args.get("query")
+    res = requests.get(
+        f"{HOST_URL}/test")
+    body = res.json()
+    return quart.Response(response=json.dumps(body), status=200)
+
 if __name__ == '__main__':
-#    import ssl
-#    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-#    ssl_context.load_cert_chain(certfile='/home/ubuntu/certs/ag1.pro_cert_chain.pem', keyfile='/home/ubuntu/certs/ag1.pro_key.key')
     app.run(host="0.0.0.0", port=443, 
             certfile='/home/ubuntu/certs/ag1.pro_cert.pem', 
             keyfile='/home/ubuntu/certs/ag1.pro_key.key',
