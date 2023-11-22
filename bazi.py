@@ -55,4 +55,8 @@ async def test():
     text = f"Hello from {host}!"
     return quart.Response(text, mimetype="text/plain")
 
-app.run(host="0.0.0.0", port=7860)
+if __name__ == '__main__':
+    import ssl
+    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+    ssl_context.load_cert_chain(certfile='~/certs/ag1.pro_cert.pem', keyfile='~/certs/ag1.pro_key.key')
+    app.run(host="0.0.0.0", port=7860)
