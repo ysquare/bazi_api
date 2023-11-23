@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Bazi API
+  description: 从公历时间获取四柱八字
+  version: "v1"
+servers:
+  - url: https://oc.ag1.pro
+paths:
+  /bazi:
+    post:
+      summary: Get Bazi
+      operationId: getBazi
+      x-openai-isConsequential: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                year:
+                  type: integer
+                month:
+                  type: integer
+                day:
+                  type: integer
+                hour:
+                  type: integer
+                min:
+                  type: integer
+                  default: 0
+                sec:
+                  type: integer
+                  default: 0
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string

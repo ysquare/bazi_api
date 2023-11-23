@@ -1,0 +1,17 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Bazi Calculator",
+    "name_for_model": "baziCalculator",
+    "description_for_human": "Calculate Bazi based on date and time.",
+    "description_for_model": "Calculate Bazi based on date and time.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://oc.ag1.pro/openapi.yaml"
+    },
+    "logo_url": "http://oc.ag1.pro/logo.png",
+    "contact_email": "ysquare@gmail.com",
+    "legal_info_url": "https://example.com/legal"
+}
